@@ -45,7 +45,7 @@ use Cake\Mailer\Mailer;
 use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
-
+use Cake\Core\Plugin;
 /*
  * See https://github.com/josegonzalez/php-dotenv for API details.
  *
@@ -90,7 +90,7 @@ try {
 if (file_exists(CONFIG . 'app_local.php')) {
     Configure::load('app_local', 'default');
 }
-
+// Assurez-vous que cette ligne est bien après la configuration de `debug`
 /*
  * When debug = true the metadata cache should only last
  * for a short time.
@@ -100,6 +100,7 @@ if (Configure::read('debug')) {
     Configure::write('Cache._cake_core_.duration', '+2 minutes');
     // disable router cache during development
     Configure::write('Cache._cake_routes_.duration', '+2 seconds');
+    Plugin::load('DebugKit', ['bootstrap' => true]);
 }
 
 /*
