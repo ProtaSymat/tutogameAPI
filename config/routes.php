@@ -131,5 +131,25 @@ return function (RouteBuilder $routes): void {
             '/delete-category/{id}',
             ['controller' => 'PricePlus', 'action' => 'deleteCategory', 'prefix' => 'Api']
         )->setPatterns(['id' => '\d+'])->setPass(['id']);
+
+     $builder->get(
+            '/news',
+            ['controller' => 'PricePlus', 'action' => 'viewAllNews', 'prefix' => 'Api']
+        );
+    
+        $builder->get(
+            '/new/{id}',
+            ['controller' => 'PricePlus', 'action' => 'viewNew', 'prefix' => 'Api']
+        )->setPatterns(['id' => '\d+'])->setPass(['id']);
+
+        $builder->post(
+            '/add-new',
+            ['controller'=>'PricePlus','action'=>'addNew','prefix'=>'Api']
+        );
+    
+        $builder->delete(
+            '/delete-new/{id}',
+            ['controller' => 'PricePlus', 'action' => 'deleteNew', 'prefix' => 'Api']
+        )->setPatterns(['id' => '\d+'])->setPass(['id']);
     });
 };

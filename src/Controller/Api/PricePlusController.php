@@ -96,4 +96,49 @@ class PricePlusController extends AppController {
         $this->set(compact('message'));
         $this->viewBuilder()->setOption('serialize', ['message']);
     }
+
+    
+    public function viewAllNews()
+{
+    $this->loadModel('News');
+    $news = $this->News->find()->all();
+    $this->set(compact('News'));
+    $this->viewBuilder()->setOption('serialize', ['news']);
+}
+
+    public function viewNew($id)
+    {
+        $this->loadModel('News');
+        $new = $this->News->get($id);
+        $this->set(compact('new'));
+        $this->viewBuilder()->setOption('serialize', ['new']);
+    }
+
+    public function deleteNew($id)
+    {
+        $this->loadModel('News');
+        $this->request->allowMethod(['post', 'delete']);
+        $new = $this->News->get($id);
+        if ($this->News->delete($new)) {
+            $message = 'Deleted';
+        } else {
+            $message = 'Error';
+        }
+        $this->set(compact('message'));
+        $this->viewBuilder()->setOption('serialize', ['message']);
+    }
+
+    public function addNew()
+    {
+        $this->loadModel('News');
+        $this->request->allowMethod(['post']);
+        $new = $this->News->newEntity($this->request->getData());
+        if ($this->News->save($new)) {
+            $message = 'Saved';
+        } else {
+            $message = 'Error';
+        }
+        $this->set(compact('message'));
+        $this->viewBuilder()->setOption('serialize', ['message']);
+    }
 }
