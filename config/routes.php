@@ -101,55 +101,83 @@ return function (RouteBuilder $routes): void {
     $routes->scope('/api', function (RouteBuilder $builder) {
         $builder->setExtensions(['json']);
 
+        //Users
+        $builder->post('/user/login',['controller'=> 'PricePlus', 'action'=>'login','prefix'=>'Api']);
+        $builder->post('/user/logout',['controller'=> 'PricePlus', 'action'=>'logout','prefix'=>'Api']);
+        $builder->get('/users', ['controller' => 'PricePlus', 'action' => 'viewAllUsers', 'prefix' => 'Api']);
+        $builder->get('/user/{id}', ['controller' => 'PricePlus', 'action' => 'viewUser', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-user', ['controller' => 'PricePlus', 'action' => 'addUser', 'prefix' => 'Api']);
+        $builder->put('/edit-user/{id}', ['controller' => 'PricePlus', 'action' => 'editUser', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-user/{id}', ['controller' => 'PricePlus', 'action' => 'deleteUser', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-        $builder->post(
-            '/user/login',
-            ['controller'=> 'PricePlus', 'action'=>'login','prefix'=>'Api']
-        );
+        //Categories
+        $builder->get('/categories',['controller' => 'PricePlus', 'action' => 'viewAllCategories', 'prefix' => 'Api']);
+        $builder->get('/category/{id}',['controller' => 'PricePlus', 'action' => 'viewCategory', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-category',['controller'=>'PricePlus','action'=>'addCategory','prefix'=>'Api']);
+        $builder->put('/edit-category/{id}', ['controller' => 'PricePlus', 'action' => 'editCategory', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-category/{id}',['controller' => 'PricePlus', 'action' => 'deleteCategory', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-        $builder->post(
-            '/user/logout',
-            ['controller'=> 'PricePlus', 'action'=>'logout','prefix'=>'Api']
-        );
+        //Chapitres
+        $builder->get('/chapitres',['controller' => 'PricePlus', 'action' => 'viewAllChapitres', 'prefix' => 'Api']);
+        $builder->get('/chapitre/{id}',['controller' => 'PricePlus', 'action' => 'viewChapitre', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-chapitre',['controller'=>'PricePlus','action'=>'addChapitre','prefix'=>'Api']);
+        $builder->put('/edit-chapitre/{id}',['controller' => 'PricePlus', 'action' => 'editChapitre', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-chapitre/{id}',['controller' => 'PricePlus', 'action' => 'deleteChapitre', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-        $builder->get(
-            '/categories',
-            ['controller' => 'PricePlus', 'action' => 'viewAllCategories', 'prefix' => 'Api']
-        );
-    
-        $builder->get(
-            '/category/{id}',
-            ['controller' => 'PricePlus', 'action' => 'viewCategory', 'prefix' => 'Api']
-        )->setPatterns(['id' => '\d+'])->setPass(['id']);
+        //Articles
+        $builder->get('/articles', ['controller' => 'PricePlus', 'action' => 'viewAllArticles', 'prefix' => 'Api']);
+        $builder->get('/article/{id}', ['controller' => 'PricePlus', 'action' => 'viewArticle', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-article', ['controller' => 'PricePlus', 'action' => 'addArticle', 'prefix' => 'Api']);
+        $builder->put('/edit-article/{id}', ['controller' => 'PricePlus', 'action' => 'editArticle', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-article/{id}', ['controller' => 'PricePlus', 'action' => 'deleteArticle', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-        $builder->post(
-            '/add-category',
-            ['controller'=>'PricePlus','action'=>'addCategory','prefix'=>'Api']
-        );
-    
-        $builder->delete(
-            '/delete-category/{id}',
-            ['controller' => 'PricePlus', 'action' => 'deleteCategory', 'prefix' => 'Api']
-        )->setPatterns(['id' => '\d+'])->setPass(['id']);
+        //Tutoriels
+        $builder->get('/tutoriels', ['controller' => 'PricePlus', 'action' => 'viewAllTutoriels', 'prefix' => 'Api']);
+        $builder->get('/tutoriel/{id}', ['controller' => 'PricePlus', 'action' => 'viewTutoriel', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-tutoriel', ['controller' => 'PricePlus', 'action' => 'addTutoriel', 'prefix' => 'Api']);
+        $builder->put('/edit-tutoriel/{id}', ['controller' => 'PricePlus', 'action' => 'editTutoriel', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-tutoriel/{id}', ['controller' => 'PricePlus', 'action' => 'deleteTutoriel', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        
+        //Blocs
+        $builder->get('/blocs', ['controller' => 'PricePlus', 'action' => 'viewAllBlocs', 'prefix' => 'Api']);
+        $builder->get('/bloc/{id}', ['controller' => 'PricePlus', 'action' => 'viewBloc', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-bloc', ['controller' => 'PricePlus', 'action' => 'addBloc', 'prefix' => 'Api']);
+        $builder->put('/edit-bloc/{id}', ['controller' => 'PricePlus', 'action' => 'editBloc', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-bloc/{id}', ['controller' => 'PricePlus', 'action' => 'deleteBloc', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+                
+        //Quizs
+        $builder->get('/quizs', ['controller' => 'PricePlus', 'action' => 'viewAllQuizs', 'prefix' => 'Api']);
+        $builder->get('/quiz/{id}', ['controller' => 'PricePlus', 'action' => 'viewQuiz', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-quiz', ['controller' => 'PricePlus', 'action' => 'addQuiz', 'prefix' => 'Api']);
+        $builder->put('/edit-quiz/{id}', ['controller' => 'PricePlus', 'action' => 'editQuiz', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-quiz/{id}', ['controller' => 'PricePlus', 'action' => 'deleteQuiz', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-     $builder->get(
-            '/news',
-            ['controller' => 'PricePlus', 'action' => 'viewAllNews', 'prefix' => 'Api']
-        );
-    
-        $builder->get(
-            '/new/{id}',
-            ['controller' => 'PricePlus', 'action' => 'viewNew', 'prefix' => 'Api']
-        )->setPatterns(['id' => '\d+'])->setPass(['id']);
+        //Questions
+        $builder->get('/questions', ['controller' => 'PricePlus', 'action' => 'viewAllQuestions', 'prefix' => 'Api']);
+        $builder->get('/question/{id}', ['controller' => 'PricePlus', 'action' => 'viewQuestion', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-question', ['controller' => 'PricePlus', 'action' => 'addQuestion', 'prefix' => 'Api']);
+        $builder->put('/edit-question/{id}', ['controller' => 'PricePlus', 'action' => 'editQuestion', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-question/{id}', ['controller' => 'PricePlus', 'action' => 'deleteQuestion', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
 
-        $builder->post(
-            '/add-new',
-            ['controller'=>'PricePlus','action'=>'addNew','prefix'=>'Api']
-        );
-    
-        $builder->delete(
-            '/delete-new/{id}',
-            ['controller' => 'PricePlus', 'action' => 'deleteNew', 'prefix' => 'Api']
-        )->setPatterns(['id' => '\d+'])->setPass(['id']);
+        //Reponses
+        $builder->get('/reponses', ['controller' => 'PricePlus', 'action' => 'viewAllReponses', 'prefix' => 'Api']);
+        $builder->get('/reponse/{id}', ['controller' => 'PricePlus', 'action' => 'viewReponse', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-reponse', ['controller' => 'PricePlus', 'action' => 'addReponse', 'prefix' => 'Api']);
+        $builder->put('/edit-reponse/{id}', ['controller' => 'PricePlus', 'action' => 'editReponse', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-reponse/{id}', ['controller' => 'PricePlus', 'action' => 'deleteReponse', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        
+        //Progressions
+        $builder->get('/progressions', ['controller' => 'PricePlus', 'action' => 'viewAllProgressions', 'prefix' => 'Api']);
+        $builder->get('/progression/{id}', ['controller' => 'PricePlus', 'action' => 'viewProgression', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-progression', ['controller' => 'PricePlus', 'action' => 'addProgression', 'prefix' => 'Api']);
+        $builder->put('/edit-progression/{id}', ['controller' => 'PricePlus', 'action' => 'editProgression', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-progression/{id}', ['controller' => 'PricePlus', 'action' => 'deleteProgression', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+
+        //Historiques
+        $builder->get('/historiques', ['controller' => 'PricePlus', 'action' => 'viewAllHistoriques', 'prefix' => 'Api']);
+        $builder->get('/historique/{id}', ['controller' => 'PricePlus', 'action' => 'viewHistorique', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->post('/add-historique', ['controller' => 'PricePlus', 'action' => 'addHistorique', 'prefix' => 'Api']);
+        $builder->put('/edit-historique/{id}', ['controller' => 'PricePlus', 'action' => 'editHistorique', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
+        $builder->delete('/delete-historique/{id}', ['controller' => 'PricePlus', 'action' => 'deleteHistorique', 'prefix' => 'Api'])->setPatterns(['id' => '\d+'])->setPass(['id']);
     });
 };
